@@ -1,9 +1,17 @@
 file(GLOB_RECURSE SRC_FILES src/*.cc)
 file(GLOB_RECURSE HEADER_FILES include/*.h)
 
-add_library(core ${SRC_FILES} ${HEADER_FILES})
+add_library(core ${SRC_FILES} ${HEADER_FILES}
+        include/Vector2.h
+        include/Vector3.h
+        include/Vector4.h)
 target_include_directories(core PUBLIC include/)
 
+add_executable(core_test test/test_vec2.cc
+        test/test_vec3.cc
+        test/test_vec4.cc)
+
+target_link_libraries(core_test PRIVATE core GTest::gtest GTest::gtest_main)
 
 if(ENABLE_PROFILING)
   target_link_libraries(core PRIVATE Tracy::TracyClient)

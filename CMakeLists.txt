@@ -6,6 +6,8 @@ set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 find_package(SDL2 CONFIG REQUIRED)
+find_package(GTest CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
 
 enable_testing()
 option(ENABLE_PROFILING "Enable Tracy Profiling" OFF)
@@ -22,6 +24,7 @@ add_executable(main main.cc)
 target_link_libraries(main PRIVATE core api)
 target_link_libraries(main PRIVATE SDL2::SDL2)
 target_link_libraries(main PRIVATE SDL2::SDL2main)
+target_link_libraries(main PRIVATE imgui::imgui)
 
 if(ENABLE_PROFILING)
     target_link_libraries(main PUBLIC Tracy::TracyClient)
