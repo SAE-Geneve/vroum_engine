@@ -38,49 +38,19 @@ struct Mat4x4 {
         return m00 * mat.determinant() - m11 * mat2.determinant() + m12 * mat3.determinant() - m13 * mat4.determinant();
     }
 
-    // Méthode pour calculer le déterminant d'une matrice 3x3
-    double determinant3x3(double a00, double a01, double a02, double a03,
-                           double a10, double a11, double a12, double a13,
-                           double a20, double a21, double a22, double a23) const {
-        return a00 * (a11 * a22 - a12 * a21) -
-               a01 * (a10 * a22 - a12 * a20) +
-               a02 * (a10 * a21 - a11 * a20);
-    }
 
     // Méthode pour résoudre le système d'équations linéaires Ax = b
-    std::optional<std::tuple<double, double, double, double>> resoudreSysteme(const std::array<double, 4>& b) const {
+    std::optional<std::tuple<double, double, double, double>> resoudreSysteme(double w,double x,double y,double z) const {
         double det = determinant();
         if (det == 0.0) {
             return std::nullopt; // Pas de solution unique
         }
 
-        // Calcul des solutions
-        double x = (b[0] * determinant3x3(m10, m11, m12, m13,
-                                           m20, m21, m22, m23,
-                                           m30, m31, m32, m33)) / det;
+//complete
 
-        double y = (b[1] * determinant3x3(m00, m01, m02, m03,
-                                           m20, m21, m22, m23,
-                                           m30, m31, m32, m33)) / det;
-
-        double z = (b[2] * determinant3x3(m00, m01, m02, m03,
-                                           m10, m11, m12, m13,
-                                           m30, m31, m32, m33)) / det;
-
-        double w = (b[3] * determinant3x3(m00, m01, m02, m03,
-                                           m10, m11, m12, m13,
-                                           m20, m21, m22, m23)) / det;
-
-        return std::make_tuple(x, y, z, w);
+        return std::make_tuple(w, x, y, z);
     }
 
-    // Méthode pour afficher la matrice
-    void afficher() const {
-        std::cout << "[[" << m00 << ", " << m01 << ", " << m02 << ", " << m03 << "],\n"
-                  << " [" << m10 << ", " << m11 << ", " << m12 << ", " << m13 << "],\n"
-                  << " [" << m20 << ", " << m21 << ", " << m22 << ", " << m23 << "],\n"
-                  << " [" << m30 << ", " << m31 << ", " << m32 << ", " << m33 << "]]" << std::endl;
-    }
 };
 
 #endif //MATRICE4X4_H
