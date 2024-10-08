@@ -5,6 +5,7 @@
     "dependencies": [
         "sdl2",
         "gtest",
-        "tracy"
+        "tracy",
+        {"name": "imgui", "features": ["sdl2-binding", "sdl2-renderer-binding"]}
     ]
 }

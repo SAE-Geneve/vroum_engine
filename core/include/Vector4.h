@@ -8,6 +8,9 @@ template<typename T>
 struct Vec4 {
     T x = 0, y = 0, z = 0, w = 0;
 
+    template<typename Other_type>
+    explicit Vec4(Vec4<Other_type> v) : x(static_cast<T>(v.x)), y(static_cast<T>(v.y)), z(static_cast<T>(v.z)), w(static_cast<T>(v.w)) {}
+
     constexpr Vec4(T x = 0, T y = 0, T z = 0, T w = 0) : x(x), y(y), z(z), w(w) {}
 
     constexpr Vec4<T> operator+(Vec4<T> other) const {
