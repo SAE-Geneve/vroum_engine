@@ -27,9 +27,9 @@ TEST(Mat4x4Test, UniqueSolution) {
 
     ASSERT_TRUE(solution.has_value()); // Vérifiez qu'une solution existe
 
-    auto [x, y, z, w] = solution.value();
-    EXPECT_NEAR(x, 2/7, 1e-9);
-    EXPECT_NEAR(y, -(15/7), 1e-9);
+    auto [w, x, y, z] = solution.value();
+    EXPECT_NEAR(w, -2, 1e-9);
+    EXPECT_NEAR(x, -1, 1e-9);
+    EXPECT_NEAR(y, 2.0, 1e-9);
     EXPECT_NEAR(z, 2.0, 1e-9);
-    EXPECT_NEAR(w, 2.0, 1e-9);
 }

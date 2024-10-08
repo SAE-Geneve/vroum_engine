@@ -35,7 +35,7 @@ struct Mat4x4 {
                m20, m21, m22,
                m30, m31, m32);
 
-        return m00 * mat.determinant() - m11 * mat2.determinant() + m12 * mat3.determinant() - m13 * mat4.determinant();
+        return m00 * mat.determinant() - m01 * mat2.determinant() + m02 * mat3.determinant() - m03 * mat4.determinant();
     }
 
 
@@ -46,9 +46,32 @@ struct Mat4x4 {
             return std::nullopt; // Pas de solution unique
         }
 
-//complete
+        Mat4x4 mat1(w, m01, m02, m03,
+        x, m11, m12, m13,
+        y, m21, m22, m23,
+        z, m31, m32, m33);
 
-        return std::make_tuple(w, x, y, z);
+        Mat4x4 mat2(m00, w, m02, m03,
+        m10, x, m12, m13,
+        m20, y, m22, m23,
+        m30, z, m32, m33);
+
+        Mat4x4 mat3(m00, m01, w, m03,
+        m10, m11, x, m13,
+        m20, m21, y, m23,
+        m30, m31, z, m33);
+
+        Mat4x4 mat4(m00, m01, m02, w,
+        m10, m11, m12, x,
+        m20, m21, m22, y,
+        m30, m31, m32, z);
+
+        double result_w = mat1.determinant()/det;
+        double result_x = mat2.determinant()/det;
+        double result_y = mat3.determinant()/det;
+        double result_z = mat4.determinant()/det;
+
+        return std::make_tuple(result_w, result_x, result_y, result_z);
     }
 
 };
