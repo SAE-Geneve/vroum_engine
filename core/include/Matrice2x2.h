@@ -7,7 +7,6 @@ struct Mat2x2
     double a11, a12; // First line
     double a21, a22; // Second line
 
-    // Constructeur pour initialiser la matrice
     Mat2x2(double a11, double a12, double a21, double a22)
            : a11(a11), a12(a12), a21(a21), a22(a22) {}
 
