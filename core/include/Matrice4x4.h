@@ -22,18 +22,20 @@ struct Mat4x4 {
 
     // Méthode pour calculer le déterminant de la matrice 4x4
     double determinant() const {
-        return m00 * determinant3x3(m10, m11, m12, m13,
-                                      m20, m21, m22, m23,
-                                      m30, m31, m32, m33) -
-               m01 * determinant3x3(m10, m11, m12, m13,
-                                    m20, m21, m22, m23,
-                                    m30, m31, m32, m33) +
-               m02 * determinant3x3(m10, m11, m12, m13,
-                                    m20, m21, m22, m23,
-                                    m30, m31, m32, m33) -
-               m03 * determinant3x3(m10, m11, m12, m13,
-                                    m20, m21, m22, m23,
-                                    m30, m31, m32, m33);
+        Mat3x3 mat(m11, m12, m13,
+               m21, m22, m23,
+               m31, m32, m33);
+        Mat3x3 mat2(m10, m12, m13,
+               m20, m22, m23,
+               m30, m32, m33);
+        Mat3x3 mat3(m10, m11, m13,
+               m20, m21, m23,
+               m30, m31, m33);
+        Mat3x3 mat4(m10, m11, m12,
+               m20, m21, m22,
+               m30, m31, m32);
+
+        return m00 * mat.determinant() - m11 * mat2.determinant() + m12 * mat3.determinant() - m13 * mat4.determinant();
     }
 
     // Méthode pour calculer le déterminant d'une matrice 3x3

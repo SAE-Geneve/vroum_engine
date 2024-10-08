@@ -34,24 +34,9 @@ struct Mat3x3
 
         // Calcul des valeurs de x, y et z en utilisant la méthode de Cramer
 
-        //double y = (a11 * (b2 * a33 - b3 * a23) - b1 * (a21 * a33 - a23 * a31) + a13 * (a21 * b3 - b2 * a31)) / det;
-
-        double detX = (b1 * (a22 * a33 - a23 * a32) -
-                    a12 * (b2 * a33 - b3 * a32) +
-                    a13 * (b2 * a23 - b3 * a22));
-
-        double detY = (a11 * (b2 * a33 - b3 * a32) -
-                       b1 * (a21 * a33 - a23 * a31) +
-                       a13 * (a21 * b3 - a23 * b2));
-
-        double detZ = (a11 * (a22 * b3 - a23 * b2) -
-                       a12 * (a21 * b3 - a23 * b1) +
-                       b1 * (a21 * a32 - a22 * a31));
-
-        // Calcul des valeurs de x, y et z
-        double x = detX / det;
-        double y = detY / det;
-        double z = detZ / det;
+        double x = (b1 * (a22 * a33 - a32 * a23) - a12 * (b2 * a33 - a23 * b3) + a13 * (b2 * a32 - a22 * b3))  / det;
+        double y = (a11 * (b2 * a33 - b3 * a23) - b1 * (a21 * a33 - a23 * a31) + a13 * (a21 * b3 - b2 * a31)) / det;
+        double z = (a11 * (a22 * b3 - a32 * b2) - a12 * (a21 * b3 - b2 * a31) + b1 * (a21 * a32 - a22 * a31)) / det;
 
 
         return std::make_tuple(x, y, z);
