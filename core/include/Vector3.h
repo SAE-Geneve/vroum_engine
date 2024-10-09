@@ -4,6 +4,7 @@
 
 #ifndef VECTOR3_H
 #define VECTOR3_H
+#include "iostream"
 
 template<typename T>
 struct Vec3 {
@@ -63,6 +64,46 @@ struct Vec3 {
             z * other.x - x * other.z,
             x * other.y - y * other.x
         };
+    }
+
+    [[nodiscard]] T& operator[](const int index)
+    {
+        if (index == 0)
+        {
+            return x;
+        }
+        else if (index == 1)
+        {
+            return y;
+        }
+        else if (index == 2)
+        {
+            return z;
+        }
+        else
+        {
+            throw std::out_of_range("Index out of range");
+        }
+    }
+
+    [[nodiscard]] T operator[](const int index) const
+    {
+        if (index == 0)
+        {
+            return x;
+        }
+        else if (index == 1)
+        {
+            return y;
+        }
+        else if (index == 2)
+        {
+            return z;
+        }
+        else
+        {
+            throw std::out_of_range("Index out of range");
+        }
     }
 };
 #endif //VECTOR3_H
