@@ -46,6 +46,8 @@ int main(int argc, char* argv[]) {
     bool running = true;
     SDL_Event event;
     while (running) {
+
+
         currentTime = SDL_GetTicks();
         deltaTime = currentTime - lastTime;
         lastTime = currentTime;

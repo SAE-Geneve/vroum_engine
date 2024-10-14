@@ -58,5 +58,29 @@ struct Vec4 {
     static T Dot(const Vec4<T>& v1, const Vec4<T>& v2) {
         return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z) + (v1.w * v2.w);
     }
+
+    [[nodiscard]] T& operator[](const int index)
+    {
+        if (index == 0)
+        {
+            return x;
+        }
+        else if (index == 1)
+        {
+            return y;
+        }
+        else if (index == 2)
+        {
+            return z;
+        }
+        else if (index == 3)
+        {
+            return w;
+        }
+        else
+        {
+            throw std::out_of_range("Index out of range");
+        }
+    }
 };
 #endif //VECTOR4_H

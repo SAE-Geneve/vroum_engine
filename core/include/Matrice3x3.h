@@ -3,76 +3,89 @@
 
 #include "Vector3.h"
 #include <optional>
+#include <Matrice2x2.h>
 
-template<typename T>
+template <typename T>
 
-struct Mat3x3
+class Mat3x3
 {
-    T a11, a12, a13;
-    T a21, a22, a23;
-    T a31, a32, a33;
+public:
+    constexpr static std::size_t RowNbr = 3;
+    constexpr static std::size_t ColNbr = 3;
+
+    // Set the matrix to the 3x3 identity by default.
+    T Val[RowNbr][ColNbr]{
+        {1, 0, 0},
+        {0, 1, 0},
+        {0, 0, 1}
+    };
+
+    constexpr Mat3x3() noexcept = default;
 
 
-    Mat3x3(T a11, T a12, T a13,
-            T a21, T a22, T a23,
-            T a31, T a32, T a33)
-        : a11(a11), a12(a12), a13(a13),
-          a21(a21), a22(a22), a23(a23),
-          a31(a31), a32(a32), a33(a33) {}
-
-    [[nodiscard]] constexpr double determinant() const {
-        return a11 * (a22 * a33 - a23 * a32) -
-               a12 * (a21 * a33 - a23 * a31) +
-               a13 * (a21 * a32 - a22 * a31);
+    constexpr Mat3x3(Vec3<T> a, Vec3<T> b, Vec3<T> c) noexcept
+    {
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            Val[row][0] = a[row];
+            Val[row][1] = b[row];
+            Val[row][2] = c[row];
+        }
     }
 
-    [[nodiscard]] constexpr std::optional<std::tuple<T, T, T>> SolveSystem(T b1, T b2, T b3) const noexcept{
-        double det = determinant();
+    [[nodiscard]] constexpr static Mat3x3<T> Identity() noexcept
+    {
+        return Mat3x3<T>(Vec3<T>(1, 0, 0), Vec3<T>(0, 1, 0), Vec3<T>(0, 0, 1));
+    }
 
-        if (det == 0.0) {
-            return std::nullopt; // Pas de solution unique
+    [[nodiscard]] constexpr Mat3x3<T> operator+(const Mat3x3<T>& m) const noexcept
+    {
+        Mat3x3<T> mResult;
+
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                mResult.Val[row][col] = Val[row][col] + m.Val[row][col];
+            }
         }
 
-        T x = (b1 * (a22 * a33 - a32 * a23) - a12 * (b2 * a33 - a23 * b3) + a13 * (b2 * a32 - a22 * b3)) / det;
-        T y = (a11 * (b2 * a33 - b3 * a23) - b1 * (a21 * a33 - a23 * a31) + a13 * (a21 * b3 - b2 * a31)) / det;
-        T z = (a11 * (a22 * b3 - a32 * b2) - a12 * (a21 * b3 - b2 * a31) + b1 * (a21 * a32 - a22 * a31)) / det;
-
-        return std::make_tuple(x, y, z);
+        return mResult;
     }
 
-    Mat3x3 operator+(const Mat3x3& other) const {
-        return Mat3x3(a11 + other.a11, a12 + other.a12, a13 + other.a13,
-                      a21 + other.a21, a22 + other.a22, a23 + other.a23,
-                      a31 + other.a31, a32 + other.a32, a33 + other.a33);
+    [[nodiscard]] constexpr Mat3x3<T> operator-(const Mat3x3<T>& m) const noexcept
+    {
+        Mat3x3<T> mResult;
+
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                mResult.Val[row][col] = Val[row][col] - m.Val[row][col];
+            }
+        }
+
+        return mResult;
     }
 
-    Mat3x3 operator-(const Mat3x3& other) const {
-        return Mat3x3(a11 - other.a11, a12 - other.a12, a13 - other.a13,
-                      a21 - other.a21, a22 - other.a22, a23 - other.a23,
-                      a31 - other.a31, a32 - other.a32, a33 - other.a33);
+    [[nodiscard]] constexpr Mat3x3<T> operator*(const T scalar) const noexcept
+    {
+        Mat3x3<T> mResult;
+
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                mResult.Val[row][col] = Val[row][col] * scalar;
+            }
+        }
+
+        return mResult;
     }
 
-    Mat3x3 operator*(const Mat3x3& other) const {
-        return Mat3x3(
-            a11 * other.a11 + a12 * other.a21 + a13 * other.a31,
-            a11 * other.a12 + a12 * other.a22 + a13 * other.a32,
-            a11 * other.a13 + a12 * other.a23 + a13 * other.a33,
-            a21 * other.a11 + a22 * other.a21 + a23 * other.a31,
-            a21 * other.a12 + a22 * other.a22 + a23 * other.a32,
-            a21 * other.a13 + a22 * other.a23 + a23 * other.a33,
-            a31 * other.a11 + a32 * other.a21 + a33 * other.a31,
-            a31 * other.a12 + a32 * other.a22 + a33 * other.a32,
-            a31 * other.a13 + a32 * other.a23 + a33 * other.a33
-        );
-    }
-
-    // Multiplication par un scalaire
-    Mat3x3 operator*(const T scalar) const {
-        return Mat3x3(
-            a11 * scalar, a12 * scalar, a13 * scalar,
-            a21 * scalar, a22 * scalar, a23 * scalar,
-            a31 * scalar, a32 * scalar, a33 * scalar
-        );
+    [[nodiscard]] constexpr friend Mat3x3<T> operator*(const T scalar, const Mat3x3<T>& m) noexcept
+    {
+        return m * scalar;
     }
 
     constexpr Mat3x3<T>& operator*=(const T scalar) noexcept
@@ -80,52 +93,130 @@ struct Mat3x3
         return *this = *this * scalar;
     }
 
-    std::optional<Mat3x3> inverse() const {
-        T det = determinant();
+    [[nodiscard]] constexpr Mat3x3<T> operator*(const Mat3x3<T>& m) const noexcept
+    {
+        Mat3x3<T> mResult;
 
-        if (det == 0.0) {
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                T sum = 0;
+
+                for (std::size_t k = 0; k < 3; k++)
+                {
+                    sum += Val[row][k] * m.Val[k][col];
+                }
+
+                mResult.Val[row][col] = sum;
+            }
+        }
+
+        return mResult;
+    }
+
+
+    [[nodiscard]] constexpr Vec3<T> operator*(const Vec3<T> v) const noexcept
+    {
+        Vec3<T> vResult;
+
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            T internResult = 0;
+
+            for (std::size_t j = 0; j < RowNbr; j++)
+            {
+                internResult += Val[row][j] * v[j];
+            }
+
+            vResult[row] = internResult;
+        }
+
+        return vResult;
+    }
+
+    [[nodiscard]] constexpr T Det() const noexcept
+    {
+        // Rule of Sarrus: det(A) = aei + bfg + cdh - gec - hfa - idb
+        return Val[0][0] * Val[1][1] * Val[2][2] + Val[0][1] * Val[1][2] * Val[2][0] // aei + bfg.
+            + Val[0][2] * Val[1][0] * Val[2][1] - Val[2][0] * Val[1][1] * Val[0][2] // + cdh - gec
+            - Val[2][1] * Val[1][2] * Val[0][0] - Val[2][2] * Val[1][0] * Val[0][1]; // - hfa - idb
+    }
+
+    template <typename U>
+
+
+    std::optional<Mat3x3<U>> Inverted() const
+    {
+        T det = det();
+
+        if (det == 0.0)
+        {
             return std::nullopt;
         }
 
-        return Mat3x3(
-            (a22 * a33 - a23 * a32) / det, (a13 * a32 - a12 * a33) / det, (a12 * a23 - a13 * a22) / det,
-            (a23 * a31 - a21 * a33) / det, (a11 * a33 - a13 * a31) / det, (a13 * a21 - a11 * a23) / det,
-            (a21 * a32 - a22 * a31) / det, (a12 * a31 - a11 * a32) / det, (a11 * a22 - a12 * a21) / det
-        );
+
+        Mat3x3<U> coFactorMatrix;
+
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                T sign = (col + row) % 2 == 0 ? 1 : -1;
+
+                Mat2x2<U> subMat;
+                std::size_t subMatRow = 0, subMatCol = 0;
+
+                for (std::size_t subRow = 0; subRow < RowNbr; subRow++)
+                {
+                    if (subRow == row) continue;
+
+                    for (std::size_t subCol = 0; subCol < ColNbr; subCol++)
+                    {
+                        if (subCol == col) continue;
+
+                        // Add the value to the sub-matrix.
+                        subMat.Val[subMatRow][subMatCol] = Val[subRow][subCol];
+                        subMatCol++;
+                    }
+
+                    subMatRow++;
+                    subMatCol = 0;
+                }
+
+                coFactorMatrix.Val[row][col] = subMat.Det() * sign; // Det(Mij) * (-1)^i+j
+            }
+        }
+        Mat3x3<U> inverted = coFactorMatrix.Transposed() * (static_cast<U>(1 / Det()));
+
+        return
+            inverted;
     }
 
+    [[nodiscard]] constexpr Mat3x3<T> Transposed() const noexcept
+    {
+        Mat3x3<T> transposed;
 
-    [[nodiscard]] constexpr T determinantSarrus() const {
-        return a11 * a22 * a33 + a12 * a23 * a31 + a13 * a21 * a32
-             - a13 * a22 * a31 - a11 * a23 * a32 - a12 * a21 * a33;
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                transposed.Val[row][col] = Val[col][row];
+            }
+        }
+
+        return transposed;
     }
 
-    // Méthode pour la transposition de la matrice
-    [[nodiscard]] constexpr Mat3x3 transpose() const noexcept {
-        return Mat3x3(a11, a21, a31,
-                      a12, a22, a32,
-                      a13, a23, a33);
+    constexpr const T& operator()(std::size_t row, std::size_t col) const noexcept
+    {
+        return Val[row][col];
     }
-
-    // Multiplication par un vecteur 3D
-    [[nodiscard]] constexpr Vec3<T> operator*(const Vec3<T>& vec) const {
-        return Vec3<T>(
-            a11 * vec.x + a12 * vec.y + a13 * vec.z,
-            a21 * vec.x + a22 * vec.y + a23 * vec.z,
-            a31 * vec.x + a32 * vec.y + a33 * vec.z
-        );
-    }
-
 };
 
 #endif //MATRICE3X3_H
 
-/* add
- * soustraction
- * mult scalaire et inversement
- * mult par vec similaire
- * determinat methode de sarus
- * transposition
- * inversse
- * rotation??
+/*
+ * matrice identité
+ * google coding style
 */

@@ -86,24 +86,5 @@ struct Vec3 {
         }
     }
 
-    [[nodiscard]] T operator[](const int index) const
-    {
-        if (index == 0)
-        {
-            return x;
-        }
-        else if (index == 1)
-        {
-            return y;
-        }
-        else if (index == 2)
-        {
-            return z;
-        }
-        else
-        {
-            throw std::out_of_range("Index out of range");
-        }
-    }
 };
 #endif //VECTOR3_H

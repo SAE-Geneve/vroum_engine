@@ -4,197 +4,235 @@
 #include <Matrice3x3.h>
 #include "Vector4.h"
 
-template<typename T>
-
-struct Mat4x4 {
-
-    T m00, m01, m02, m03;
-    T m10, m11, m12, m13;
-    T m20, m21, m22, m23;
-    T m30, m31, m32, m33;
+template <typename T>
 
 
-    Mat4x4(T m00, T m01, T m02, T m03,
-           T m10, T m11, T m12, T m13,
-           T m20, T m21, T m22, T m23,
-           T m30, T m31, T m32, T m33)
-        : m00(m00), m01(m01), m02(m02), m03(m03),
-          m10(m10), m11(m11), m12(m12), m13(m13),
-          m20(m20), m21(m21), m22(m22), m23(m23),
-          m30(m30), m31(m31), m32(m32), m33(m33) {}
+class Mat4x4
+{
+public:
+    constexpr static std::size_t RowNbr = 4;
+    constexpr static std::size_t ColNbr = 4;
 
+    // Set the matrix to the 4x4 identity by default.
+    T Val[RowNbr][ColNbr]{
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
+    };
 
-    double determinant() const {
-        Mat3x3 mat(m11, m12, m13,
-               m21, m22, m23,
-               m31, m32, m33);
-        Mat3x3 mat2(m10, m12, m13,
-               m20, m22, m23,
-               m30, m32, m33);
-        Mat3x3 mat3(m10, m11, m13,
-               m20, m21, m23,
-               m30, m31, m33);
-        Mat3x3 mat4(m10, m11, m12,
-               m20, m21, m22,
-               m30, m31, m32);
+    constexpr Mat4x4() noexcept = default;
 
-        return m00 * mat.determinant() - m01 * mat2.determinant() - m02 * mat3.determinant() - m03 * mat4.determinant();
-    }
-
-
-    std::optional<std::tuple<T, T, T, T>> resoudreSysteme(T w,T x,T y,T z) const {
-        T det = determinant();
-        if (det == 0.0) {
-            return std::nullopt; // Pas de solution unique
-        }
-
-        Mat4x4 mat1(w, m01, m02, m03,
-        x, m11, m12, m13,
-        y, m21, m22, m23,
-        z, m31, m32, m33);
-
-        Mat4x4 mat2(m00, w, m02, m03,
-        m10, x, m12, m13,
-        m20, y, m22, m23,
-        m30, z, m32, m33);
-
-        Mat4x4 mat3(m00, m01, w, m03,
-        m10, m11, x, m13,
-        m20, m21, y, m23,
-        m30, m31, z, m33);
-
-        Mat4x4 mat4(m00, m01, m02, w,
-        m10, m11, m12, x,
-        m20, m21, m22, y,
-        m30, m31, m32, z);
-
-        T result_w = mat1.determinant()/det;
-        T result_x = mat2.determinant()/det;
-        T result_y = mat3.determinant()/det;
-        T result_z = mat4.determinant()/det;
-
-        return std::make_tuple(result_w, result_x, result_y, result_z);
-    }
-
-
-     Mat4x4 operator+(const Mat4x4& other) const {
-        return Mat4x4(
-            m00 + other.m00, m01 + other.m01, m02 + other.m02, m03 + other.m03,
-            m10 + other.m10, m11 + other.m11, m12 + other.m12, m13 + other.m13,
-            m20 + other.m20, m21 + other.m21, m22 + other.m22, m23 + other.m23,
-            m30 + other.m30, m31 + other.m31, m32 + other.m32, m33 + other.m33
-        );
-    }
-
-    Mat4x4 operator-(const Mat4x4& other) const {
-        return Mat4x4(
-            m00 - other.m00, m01 - other.m01, m02 - other.m02, m03 - other.m03,
-            m10 - other.m10, m11 - other.m11, m12 - other.m12, m13 - other.m13,
-            m20 - other.m20, m21 - other.m21, m22 - other.m22, m23 - other.m23,
-            m30 - other.m30, m31 - other.m31, m32 - other.m32, m33 - other.m33
-        );
-    }
-
-    Mat4x4 operator*(const Mat4x4& other) const {
-        return Mat4x4(
-            m00 * other.m00 + m01 * other.m10 + m02 * other.m20 + m03 * other.m30,
-            m00 * other.m01 + m01 * other.m11 + m02 * other.m21 + m03 * other.m31,
-            m00 * other.m02 + m01 * other.m12 + m02 * other.m22 + m03 * other.m32,
-            m00 * other.m03 + m01 * other.m13 + m02 * other.m23 + m03 * other.m33,
-            m10 * other.m00 + m11 * other.m10 + m12 * other.m20 + m13 * other.m30,
-            m10 * other.m01 + m11 * other.m11 + m12 * other.m21 + m13 * other.m31,
-            m10 * other.m02 + m11 * other.m12 + m12 * other.m22 + m13 * other.m32,
-            m10 * other.m03 + m11 * other.m13 + m12 * other.m23 + m13 * other.m33,
-            m20 * other.m00 + m21 * other.m10 + m22 * other.m20 + m23 * other.m30,
-            m20 * other.m01 + m21 * other.m11 + m22 * other.m21 + m23 * other.m31,
-            m20 * other.m02 + m21 * other.m12 + m22 * other.m22 + m23 * other.m32,
-            m20 * other.m03 + m21 * other.m13 + m22 * other.m23 + m23 * other.m33,
-            m30 * other.m00 + m31 * other.m10 + m32 * other.m20 + m33 * other.m30,
-            m30 * other.m01 + m31 * other.m11 + m32 * other.m21 + m33 * other.m31,
-            m30 * other.m02 + m31 * other.m12 + m32 * other.m22 + m33 * other.m32,
-            m30 * other.m03 + m31 * other.m13 + m32 * other.m23 + m33 * other.m33
-        );
-    }
-
-
-    Mat4x4 operator*(const T scalar) const {
-        return Mat4x4(
-            m00 * scalar, m01 * scalar, m02 * scalar, m03 * scalar,
-            m10 * scalar, m11 * scalar, m12 * scalar, m13 * scalar,
-            m20 * scalar, m21 * scalar, m22 * scalar, m23 * scalar,
-            m30 * scalar, m31 * scalar, m32 * scalar, m33 * scalar
-        );
-    }
-
-    constexpr Mat3x3<T>& operator*=(const T scalar) noexcept
+    constexpr Mat4x4(Vec4<T> a, Vec4<T> b, Vec4<T> c, Vec4<T> d) noexcept
     {
-        return *this = *this * scalar;
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            Val[row][0] = a[row];
+            Val[row][1] = b[row];
+            Val[row][2] = c[row];
+            Val[row][3] = d[row];
+        }
     }
 
-    // Transposition de la matrice
-    Mat4x4 transpose() const {
-        return Mat4x4(
-            m00, m10, m20, m30,
-            m01, m11, m21, m31,
-            m02, m12, m22, m32,
-            m03, m13, m23, m33
-        );
+    [[nodiscard]] constexpr static Mat4x4<T> Identity() noexcept
+    {
+        return Mat4x4<T>(Vec4<T>(1, 0, 0, 0), Vec4<T>(0, 1, 0, 0), Vec4<T>(0, 0, 1, 0), Vec4<T>(0, 0, 0, 1));
     }
 
-    // Multiplication par un vecteur 4D
-    Vec4<T> operator*(const Vec4<T>& vec) const {
-        return Vec4<T>(
-            m00 * vec.x + m01 * vec.y + m02 * vec.z + m03 * vec.w,
-            m10 * vec.x + m11 * vec.y + m12 * vec.z + m13 * vec.w,
-            m20 * vec.x + m21 * vec.y + m22 * vec.z + m23 * vec.w,
-            m30 * vec.x + m31 * vec.y + m32 * vec.z + m33 * vec.w
-        );
-    }
+    [[nodiscard]] constexpr Mat4x4<T> operator+(const Mat4x4<T>& m) const noexcept
+    {
+        Mat4x4<T> mResult;
 
-    std::optional<Mat4x4<T>> inverse() const {
-        T det = determinant();
-        if (det == 0.0) {
-            return std::nullopt; // Pas d'inverse si le déterminant est zéro
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                mResult.Val[row][col] = Val[row][col] + m.Val[row][col];
+            }
         }
 
-        // Matrice des cofacteurs
-        Mat3x3<T> m00(m11, m12, m13, m21, m22, m23, m31, m32, m33);
-        Mat3x3<T> m01(m10, m12, m13, m20, m22, m23, m30, m32, m33);
-        Mat3x3<T> m02(m10, m11, m13, m20, m21, m23, m30, m31, m33);
-        Mat3x3<T> m03(m10, m11, m12, m20, m21, m22, m30, m31, m32);
+        return mResult;
+    }
 
-        // Calcul des cofacteurs
-        T c00 = m00.determinant();
-        T c01 = -m01.determinant();
-        T c02 = m02.determinant();
-        T c03 = -m03.determinant();
+    constexpr Mat4x4<T> operator-(const Mat4x4<T>& m) const noexcept
+    {
+        Mat4x4<T> mResult;
 
-        T c10 = -Mat3x3<T>(m01).determinant();  // Autres cofacteurs...
-        T c11 = Mat3x3<T>(m00).determinant();
-        T c12 = -Mat3x3<T>(m02).determinant();
-        T c13 = Mat3x3<T>(m03).determinant();
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                mResult.Val[row][col] = Val[row][col] - m.Val[row][col];
+            }
+        }
 
-        T c20 = Mat3x3<T>(m02).determinant();
-        T c21 = -Mat3x3<T>(m03).determinant();
-        T c22 = Mat3x3<T>(m00).determinant();
-        T c23 = -Mat3x3<T>(m01).determinant();
+        return mResult;
+    }
 
-        T c30 = -Mat3x3<T>(m03).determinant();
-        T c31 = Mat3x3<T>(m02).determinant();
-        T c32 = -Mat3x3<T>(m01).determinant();
-        T c33 = Mat3x3<T>(m00).determinant();
+    [[nodiscard]] constexpr Mat4x4<T> operator*(const T scalar) const noexcept
+    {
+        Mat4x4<T> mResult;
 
-        // Construire la matrice des cofacteurs
-        Mat4x4<T> cofactorMatrix(c00, c01, c02, c03,
-                                 c10, c11, c12, c13,
-                                 c20, c21, c22, c23,
-                                 c30, c31, c32, c33);
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                mResult.Val[row][col] = Val[row][col] * scalar;
+            }
+        }
 
-        // Transposer la matrice des cofacteurs
-        Mat4x4<T> adjugate = cofactorMatrix.transpose();
+        return mResult;
+    }
 
-        // Diviser chaque élément par le déterminant
-        return adjugate * (1.0 / det);
+    constexpr friend Mat4x4<T> operator*(const T scalar, const Mat4x4<T>& m) noexcept
+    {
+        return m * scalar;
+    }
+
+    [[nodiscard]] constexpr Mat4x4<T> operator*(const Mat4x4<T>& m) const noexcept
+    {
+        Mat4x4<T> mResult;
+
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                T sum = 0;
+
+                for (std::size_t k = 0; k < 4; k++)
+                {
+                    sum += Val[row][k] * m.Val[k][col];
+                }
+
+                mResult.Val[row][col] = sum;
+            }
+        }
+
+        return mResult;
+    }
+
+    [[nodiscard]] constexpr Vec4<T> operator*(const Vec4<T> v) const noexcept
+    {
+        Vec4<T> vResult;
+
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            T internResult = 0;
+
+            for (std::size_t j = 0; j < RowNbr; j++)
+            {
+                internResult += Val[row][j] * v[j];
+            }
+
+            vResult[row] = internResult;
+        }
+
+        return vResult;
+    }
+
+    [[nodiscard]] constexpr T Det() const noexcept
+    {
+        T detA = 0;
+
+        for (std::size_t col = 0; col < ColNbr; col++)
+        {
+            T sign = (1 + (col + 1)) % 2 == 0 ? 1 : -1;
+
+            Mat3x3<T> subMat;
+            std::size_t subMatRow = 0, subMatCol = 0;
+
+            for (std::size_t subRow = 0; subRow < RowNbr; subRow++)
+            {
+                if (subRow == 0) continue;
+
+                for (std::size_t subCol = 0; subCol < ColNbr; subCol++)
+                {
+                    if (subCol == col) continue;
+
+                    // Add the value to the sub-matrix.
+                    subMat.Val[subMatRow][subMatCol] = Val[subRow][subCol];
+                    subMatCol++;
+                }
+
+                subMatRow++;
+                subMatCol = 0;
+            }
+
+            // Det(A) = sum of all : (-1)^1+i * a1i * det(A1i)
+            detA += sign * Val[0][col] * subMat.Det();
+        }
+
+        return detA;
+    }
+
+    template <typename U>
+    [[nodiscard]] std::optional<Mat4x4<U>> inverse() const
+    {
+        {
+            T det = det();
+            if (det == 0.0)
+            {
+                return std::nullopt; // Pas d'inverse si le déterminant est zéro
+            }
+
+
+            // Sum of determinants of all sub-matrices * (-1)^i+j
+            Mat4x4<U> coFactorMatrix;
+
+            for (std::size_t row = 0; row < RowNbr; row++)
+            {
+                for (std::size_t col = 0; col < ColNbr; col++)
+                {
+                    T sign = (col + row) % 2 == 0 ? 1 : -1;
+
+                    Mat3x3<U> subMat;
+                    std::size_t subMatRow = 0, subMatCol = 0;
+
+                    for (std::size_t subRow = 0; subRow < RowNbr; subRow++)
+                    {
+                        if (subRow == row) continue;
+
+                        for (std::size_t subCol = 0; subCol < ColNbr; ++subCol)
+                        {
+                            if (subCol == col) continue;
+
+                            // Add the value to the sub-matrix.
+                            subMat.Val[subMatRow][subMatCol] = Val[subRow][subCol];
+                            subMatCol++;
+                        }
+
+                        subMatRow++;
+                        subMatCol = 0;
+                    }
+
+                    coFactorMatrix.Val[row][col] = subMat.Det() * sign; // Det(Mij) * (-1)^i+j
+                }
+            }
+
+            Mat4x4<U> inverted = coFactorMatrix.Transposed() * (static_cast<U>(1 / Det()));
+
+            return inverted;
+        }
+    }
+
+    [[nodiscard]] constexpr Mat4x4<T> Transposed() const noexcept
+    {
+        Mat4x4<T> transposed;
+
+        for (std::size_t row = 0; row < RowNbr; row++)
+        {
+            for (std::size_t col = 0; col < ColNbr; col++)
+            {
+                transposed.Val[row][col] = Val[col][row];
+            }
+        }
+
+        return transposed;
+    }
+
+    constexpr const T& operator()(std::size_t row, std::size_t col) const noexcept
+    {
+        return Val[row][col];
     }
 };
 
