@@ -5,48 +5,86 @@
 
 template<typename T>
 
-struct Mat2x2
+class Mat2x2
 {
+public:
+    constexpr static std::size_t RowNbr = 3;
+    constexpr static std::size_t ColNbr = 3;
 
-    T a11, a12; // First line
-    T a21, a22; // Second line
+    T Val[RowNbr][ColNbr] = {
+        {1, 0},
+        {0, 1}
+    };
 
-    Mat2x2(T a11, T a12, T a21, T a22)
-           : a11(a11), a12(a12), a21(a21), a22(a22) {}
+    constexpr Mat2x2() noexcept = default;
 
-    double determinant() const {
-        return a11 * a22 - a12 * a21;
+    /**
+     * @note Vectors are added in column major order.
+     */
+    constexpr Mat2x2(Vec2<T> a, Vec2<T> b) noexcept
+    {
+        Val[0][0] = a.X;
+        Val[0][1] = b.X;
+        Val[1][0] = a.Y;
+        Val[1][1] = b.Y;
     }
 
+    [[nodiscard]] constexpr static Mat2x2<T> Identity() noexcept
+    {
+        return Mat2x2<T>({1, 0}, {0, 1});
+    }
 
-    std::optional<std::tuple<T, T>> solveSystem(T b1, T b2) const {
-        T det = determinant();
+    [[nodiscard]] constexpr T Det() const noexcept
+    {
+        return (Val[0][0] * Val[1][1]) - (Val[0][1] * Val[1][0]);
+    }
 
-        if (det == 0.0) {
-            return std::nullopt; // Pas de solution unique
+    std::optional<Mat2x2<T>> inverse() const
+    {
+        T det = det();
+
+        if (det == 0.0)
+        {
+            return std::nullopt;
         }
 
-        T x = (b1 * a22 - b2 * a12) / det;
-        T y = (a11 * b2 - a21 * b1) / det;
+        Mat2x2<T> m({Val[1][1], Val[1][0] * -1}, {Val[0][1] * -1, Val[0][0]});
 
-        return std::make_tuple(x, y);
+        return static_cast<Mat2x2<T>>(m) * (static_cast<T>(1) / static_cast<T>(Det()));
     }
 
-    Mat2x2 operator+(const Mat2x2& other) const {
-        return Mat2x2(a11 + other.a11, a12 + other.a12, a21 + other.a21, a22 + other.a22);
-    }
-
-    Mat2x2 operator-(const Mat2x2& other) const {
-        return Mat2x2(a11 - other.a11, a12 - other.a12, a21 - other.a21, a22 - other.a22);
-    }
-
-    Mat2x2 operator*(const Mat2x2& other) const {
-        return Mat2x2(
-            a11 * other.a11 + a12 * other.a21,
-            a11 * other.a12 + a12 * other.a22,
-            a21 * other.a11 + a22 * other.a21,
-            a21 * other.a12 + a22 * other.a22
+    [[nodiscard]] constexpr Mat2x2<T> operator+(const Mat2x2<T> other) const noexcept
+    {
+        return Mat2x2<T>(
+            {
+                Val[0][0] + other.Val[0][0],
+                Val[1][0] + other.Val[1][0]
+            },
+            {
+                Val[0][1] + other.Val[0][1],
+                Val[1][1] + other.Val[1][1]
+            }
         );
+    }
+
+    [[nodiscard]] constexpr Mat2x2<T> operator-(const Mat2x2<T> other) const noexcept
+    {
+        return Mat2x2<T>(
+            {
+                Val[0][0] - other.Val[0][0],
+                Val[0][1] - other.Val[0][1]
+            },
+            {
+                Val[1][0] - other.Val[1][0],
+                Val[1][1] - other.Val[1][1]
+            }
+        );
+    }
+
+    [[nodiscard]] constexpr Mat2x2<T> operator*(const T scalar) const noexcept
+    {
+        return Mat2x2<T>({Val[0][0] * scalar, Val[1][0] * scalar},
+                         {Val[0][1] * scalar, Val[1][1] * scalar});
     }
 
     constexpr Mat2x2<T>& operator*=(const T scalar) noexcept
@@ -54,39 +92,32 @@ struct Mat2x2
         return *this = *this * scalar;
     }
 
-    Mat2x2 operator*(const T scalar) const {
-        return Mat2x2(
-            a11 * scalar, a12 * scalar,
-            a21 * scalar, a22 * scalar
+    [[nodiscard]] constexpr Mat2x2<T> operator*(const Mat2x2<T> other) const noexcept
+    {
+        return Mat2x2<T>(
+            {
+                Val[0][0] * other.Val[0][0] + Val[0][1] * other.Val[1][0],
+                Val[1][0] * other.Val[0][0] + Val[1][1] * other.Val[1][0]
+            },
+            {
+                Val[0][0] * other.Val[0][1] + Val[0][1] * other.Val[1][1],
+                Val[1][0] * other.Val[0][1] + Val[1][1] * other.Val[1][1]
+            }
         );
     }
 
-    std::optional<Mat2x2> inverse() const {
-        T det = determinant();
-
-        if (det == 0.0) {
-            return std::nullopt;
-        }
-
-        return Mat2x2(
-            a22 / det, -a12 / det,
-            -a21 / det, a11 / det
-        );
-    }
-
-    // Transposition de la matrice
-    Mat2x2 transpose() const {
-        return Mat2x2(a11, a21, a12, a22);
-    }
-
-    // Multiplication par un vecteur 2D
-    Vec2<T> operator*(const Vec2<T>& vec) const {
+    [[nodiscard]] constexpr Vec2<T> operator*(const Vec2<T> vec) const noexcept
+    {
         return Vec2<T>(
-            a11 * vec.x + a12 * vec.y,
-            a21 * vec.x + a22 * vec.y
+            Val[0][0] * vec.X + Val[0][1] * vec.Y,
+            Val[1][0] * vec.X + Val[1][1] * vec.Y
         );
     }
 
+    constexpr const T& operator()(std::size_t row, std::size_t col) const noexcept
+    {
+        return Val[row][col];
+    }
 };
 
 

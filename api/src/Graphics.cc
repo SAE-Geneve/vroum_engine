@@ -3,6 +3,8 @@
 
 Graphics::Graphics(SDL_Renderer* renderer) : renderer(renderer) {}
 
+Graphics::Graphics() {}
+
 void Graphics::DrawSquare(const Square& square) const {
     SDL_Rect rect;
     rect.x = square.x - square.size / 2;
@@ -20,16 +22,17 @@ void Graphics::SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const {
 
 void Graphics::DrawCircle(const Circle& circle) const
 {
-    int x = circle.radius;
+    int x = circle.GetRadius();
     int y = 0;
     int radiusError = 1 - x;
 
+    SetDrawColor(circle.r, circle.g, circle.b, 255);
     while (x >= y) {
         // Draw horizontal lines between the edges of the circle at each height
-        SDL_RenderDrawLine(renderer, circle.x - x, circle.y + y, circle.x + x, circle.y + y);
-        SDL_RenderDrawLine(renderer, circle.x - x, circle.y - y, circle.x + x, circle.y - y);
-        SDL_RenderDrawLine(renderer, circle.x - y, circle.y + x, circle.x + y, circle.y + x);
-        SDL_RenderDrawLine(renderer, circle.x - y, circle.y - x, circle.x + y, circle.y - x);
+        SDL_RenderDrawLine(renderer, circle.getX() - x, circle.getY() + y, circle.getX() + x, circle.getY() + y);
+        SDL_RenderDrawLine(renderer, circle.getX() - x, circle.getY() - y, circle.getX() + x, circle.getY() - y);
+        SDL_RenderDrawLine(renderer, circle.getX() - y, circle.getY() + x, circle.getX() + y, circle.getY() + x);
+        SDL_RenderDrawLine(renderer, circle.getX() - y, circle.getY() - x, circle.getX() + y, circle.getY() - x);
 
         y++;
         if (radiusError < 0) {

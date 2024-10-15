@@ -2,8 +2,12 @@ file(GLOB_RECURSE SRC_FILES src/*.cc)
 file(GLOB_RECURSE HEADER_FILES include/*.h)
 
 
+
 add_library(api ${SRC_FILES} ${HEADER_FILES}
-        include/Graphics.h)
+        include/Graphics.h
+        include/solar_system.h
+        include/circle.h
+)
 target_include_directories(api PUBLIC include/)
 
 if(ENABLE_PROFILING)

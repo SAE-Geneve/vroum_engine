@@ -19,7 +19,7 @@ endif(ENABLE_PROFILING)
 
 add_subdirectory(core/)
 add_subdirectory(api/)
-
+target_link_libraries(api PRIVATE core)
 add_executable(main main.cc)
 target_link_libraries(main PRIVATE core api)
 target_link_libraries(main PRIVATE SDL2::SDL2)
@@ -30,3 +30,4 @@ if(ENABLE_PROFILING)
     target_link_libraries(main PUBLIC Tracy::TracyClient)
     target_compile_definitions(main PUBLIC TRACE_ENABLE=1)
 endif(ENABLE_PROFILING)
+

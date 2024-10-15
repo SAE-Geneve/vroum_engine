@@ -7,7 +7,8 @@ add_library(core ${SRC_FILES} ${HEADER_FILES}
         include/Vector4.h
         include/Matrice2x2.h
         include/Matrice3x3.h
-        include/Matrice4x4.h)
+        include/Matrice4x4.h
+        include/const.h)
 target_include_directories(core PUBLIC include/)
 
 add_executable(core_test test/test_vec2.cc

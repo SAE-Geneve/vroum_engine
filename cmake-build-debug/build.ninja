@@ -65,10 +65,10 @@ build CMakeFiles\main.dir\main.cc.obj: CXX_COMPILER__main_unscanned_Debug C$:\Us
 #############################################
 # Link the executable main.exe
 
-build main.exe: CXX_EXECUTABLE_LINKER__main_Debug CMakeFiles\main.dir\main.cc.obj | core\core.lib api\api.lib vcpkg_installed\x64-windows\debug\lib\SDL2d.lib vcpkg_installed\x64-windows\debug\lib\manual-link\SDL2maind.lib C$:\dev\vcpkg\installed\x64-windows\debug\lib\imguid.lib || api\api.lib core\core.lib
+build main.exe: CXX_EXECUTABLE_LINKER__main_Debug CMakeFiles\main.dir\main.cc.obj | core\core.lib api\api.lib vcpkg_installed\x64-windows\debug\lib\SDL2d.lib vcpkg_installed\x64-windows\debug\lib\manual-link\SDL2maind.lib C$:\dev\vcpkg\installed\x64-windows\debug\lib\imguid.lib core\core.lib || api\api.lib core\core.lib
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = core\core.lib  api\api.lib  vcpkg_installed\x64-windows\debug\lib\SDL2d.lib  vcpkg_installed\x64-windows\debug\lib\manual-link\SDL2maind.lib  C:\dev\vcpkg\installed\x64-windows\debug\lib\imguid.lib  shell32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = core\core.lib  api\api.lib  vcpkg_installed\x64-windows\debug\lib\SDL2d.lib  vcpkg_installed\x64-windows\debug\lib\manual-link\SDL2maind.lib  C:\dev\vcpkg\installed\x64-windows\debug\lib\imguid.lib  core\core.lib  shell32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = CMakeFiles\main.dir
   POST_BUILD = C:\Windows\system32\cmd.exe /C "cd /D C:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/dev/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-debug/main.exe -installedDir C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin -OutVariable out"
   PRE_LINK = cd .
@@ -282,11 +282,11 @@ build core\rebuild_cache: phony core\CMakeFiles\rebuild_cache.util
 #############################################
 # Order-only phony target for api
 
-build cmake_object_order_depends_target_api: phony || .
+build cmake_object_order_depends_target_api: phony || cmake_object_order_depends_target_core
 
 build api\CMakeFiles\api.dir\src\Graphics.cc.obj: CXX_COMPILER__api_unscanned_Debug C$:\Users\ROG\Documents\prog\vroum\vroum_engine\api\src\Graphics.cc || cmake_object_order_depends_target_api
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
-  INCLUDES = -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\api\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include\SDL2 -external:W0
+  INCLUDES = -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\api\include -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\core\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include\SDL2 -external:W0
   OBJECT_DIR = api\CMakeFiles\api.dir
   OBJECT_FILE_DIR = api\CMakeFiles\api.dir\src
   TARGET_COMPILE_PDB = api\CMakeFiles\api.dir\api.pdb
@@ -294,7 +294,15 @@ build api\CMakeFiles\api.dir\src\Graphics.cc.obj: CXX_COMPILER__api_unscanned_De
 
 build api\CMakeFiles\api.dir\src\Window.cc.obj: CXX_COMPILER__api_unscanned_Debug C$:\Users\ROG\Documents\prog\vroum\vroum_engine\api\src\Window.cc || cmake_object_order_depends_target_api
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
-  INCLUDES = -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\api\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include\SDL2 -external:W0
+  INCLUDES = -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\api\include -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\core\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include\SDL2 -external:W0
+  OBJECT_DIR = api\CMakeFiles\api.dir
+  OBJECT_FILE_DIR = api\CMakeFiles\api.dir\src
+  TARGET_COMPILE_PDB = api\CMakeFiles\api.dir\api.pdb
+  TARGET_PDB = api\api.pdb
+
+build api\CMakeFiles\api.dir\src\circle.cc.obj: CXX_COMPILER__api_unscanned_Debug C$:\Users\ROG\Documents\prog\vroum\vroum_engine\api\src\circle.cc || cmake_object_order_depends_target_api
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
+  INCLUDES = -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\api\include -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\core\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include\SDL2 -external:W0
   OBJECT_DIR = api\CMakeFiles\api.dir
   OBJECT_FILE_DIR = api\CMakeFiles\api.dir\src
   TARGET_COMPILE_PDB = api\CMakeFiles\api.dir\api.pdb
@@ -302,7 +310,15 @@ build api\CMakeFiles\api.dir\src\Window.cc.obj: CXX_COMPILER__api_unscanned_Debu
 
 build api\CMakeFiles\api.dir\src\empty.cc.obj: CXX_COMPILER__api_unscanned_Debug C$:\Users\ROG\Documents\prog\vroum\vroum_engine\api\src\empty.cc || cmake_object_order_depends_target_api
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
-  INCLUDES = -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\api\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include\SDL2 -external:W0
+  INCLUDES = -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\api\include -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\core\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include\SDL2 -external:W0
+  OBJECT_DIR = api\CMakeFiles\api.dir
+  OBJECT_FILE_DIR = api\CMakeFiles\api.dir\src
+  TARGET_COMPILE_PDB = api\CMakeFiles\api.dir\api.pdb
+  TARGET_PDB = api\api.pdb
+
+build api\CMakeFiles\api.dir\src\solar_system.cc.obj: CXX_COMPILER__api_unscanned_Debug C$:\Users\ROG\Documents\prog\vroum\vroum_engine\api\src\solar_system.cc || cmake_object_order_depends_target_api
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
+  INCLUDES = -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\api\include -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\core\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include -external:IC:\Users\ROG\Documents\prog\vroum\vroum_engine\cmake-build-debug\vcpkg_installed\x64-windows\include\SDL2 -external:W0
   OBJECT_DIR = api\CMakeFiles\api.dir
   OBJECT_FILE_DIR = api\CMakeFiles\api.dir\src
   TARGET_COMPILE_PDB = api\CMakeFiles\api.dir\api.pdb
@@ -316,7 +332,7 @@ build api\CMakeFiles\api.dir\src\empty.cc.obj: CXX_COMPILER__api_unscanned_Debug
 #############################################
 # Link the static library api\api.lib
 
-build api\api.lib: CXX_STATIC_LIBRARY_LINKER__api_Debug api\CMakeFiles\api.dir\src\Graphics.cc.obj api\CMakeFiles\api.dir\src\Window.cc.obj api\CMakeFiles\api.dir\src\empty.cc.obj
+build api\api.lib: CXX_STATIC_LIBRARY_LINKER__api_Debug api\CMakeFiles\api.dir\src\Graphics.cc.obj api\CMakeFiles\api.dir\src\Window.cc.obj api\CMakeFiles\api.dir\src\circle.cc.obj api\CMakeFiles\api.dir\src\empty.cc.obj api\CMakeFiles\api.dir\src\solar_system.cc.obj || core\core.lib
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = api\CMakeFiles\api.dir

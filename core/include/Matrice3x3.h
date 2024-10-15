@@ -143,10 +143,8 @@ public:
             - Val[2][1] * Val[1][2] * Val[0][0] - Val[2][2] * Val[1][0] * Val[0][1]; // - hfa - idb
     }
 
-    template <typename U>
 
-
-    std::optional<Mat3x3<U>> Inverted() const
+    std::optional<Mat3x3<T>> Inverted() const
     {
         T det = det();
 
@@ -156,7 +154,7 @@ public:
         }
 
 
-        Mat3x3<U> coFactorMatrix;
+        Mat3x3<T> coFactorMatrix;
 
         for (std::size_t row = 0; row < RowNbr; row++)
         {
@@ -164,7 +162,7 @@ public:
             {
                 T sign = (col + row) % 2 == 0 ? 1 : -1;
 
-                Mat2x2<U> subMat;
+                Mat2x2<T> subMat;
                 std::size_t subMatRow = 0, subMatCol = 0;
 
                 for (std::size_t subRow = 0; subRow < RowNbr; subRow++)
@@ -187,7 +185,7 @@ public:
                 coFactorMatrix.Val[row][col] = subMat.Det() * sign; // Det(Mij) * (-1)^i+j
             }
         }
-        Mat3x3<U> inverted = coFactorMatrix.Transposed() * (static_cast<U>(1 / Det()));
+        Mat3x3<T> inverted = coFactorMatrix.Transposed() * (static_cast<T>(1 / Det()));
 
         return
             inverted;
