@@ -7,8 +7,8 @@
 
 
 #define PI 3.1415926535897932384626433832795
-#define CENTER_X 600
-#define CENTER_Y 400
+#define CENTER_X 400
+#define CENTER_Y 300
 
 
 

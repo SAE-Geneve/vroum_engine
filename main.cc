@@ -14,7 +14,7 @@ int time1 = 0;
 int main(int argc, char* argv[]) {
 
 
-    solar_system system;
+
     // Initialize Window
     Window window("SDL2 Window with Physics Square and Circle", 800, 600);
     if (!window.IsValid()) {
@@ -25,8 +25,9 @@ int main(int argc, char* argv[]) {
 
     // Initialize Graphics with the window's renderer
     Graphics graphics(window.GetRenderer());
+    solar_system system(graphics);
 
-   /* // Create a vector to store multiple squares and circles
+    /* // Create a vector to store multiple squares and circles
     std::vector<Square> squares = {
         {400, 300, 40},
         {200, 150, 50},
@@ -41,7 +42,7 @@ int main(int argc, char* argv[]) {
         {400, 500, 30}
     };
     system.StartSolarSystem(circles);
-    std::cout << "Number of circles: " << system.circle.size() << std::endl;
+    //std::cout << "Number of circles: " << system.circles.size() << std::endl;
     Uint32 lastTime = SDL_GetTicks(); // Start time of the main loop
     Uint32 currentTime, deltaTime;
 

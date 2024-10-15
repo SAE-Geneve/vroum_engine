@@ -6,27 +6,33 @@
 #include "Graphics.h"
 #include "const.h"
 
-solar_system::solar_system() {}
+// Constructeur
+solar_system::solar_system(Graphics& graphics) : graphics_(graphics) {}
 
-void solar_system::StartSolarSystem(std::vector<Circle> circles)
-{
-    this->circle = circles;
+// Initialiser le système solaire avec une liste de cercles
+void solar_system::StartSolarSystem(const std::vector<Circle>& circles) {
+    this->circles = circles;
+    angles.resize(circles.size(), 0.0); // Assurez-vous que les angles sont initialisés
 }
 
-void solar_system::RunSolarSystem(std::vector<Circle> circles)
-{
-
+// Faire tourner les cercles autour du centre de la fenêtre
+void solar_system::RunSolarSystem() {
     for (size_t i = 0; i < circles.size(); ++i) {
-        int x = CENTER_X + static_cast<int>(solar_system().distances[i] * cos(solar_system().angles[i]));
-        int y = CENTER_Y + static_cast<int>(solar_system().distances[i] * sin(solar_system().angles[i]));
-        circles[i].SetPosition(x, y);
-        solar_system().graphics_.SetDrawColor(circles[i].r, circles[i].g, circles[i].b, 255);
-        solar_system().graphics_.DrawCircle(circles[i]);
-
-        // Update angle for next frame
-        solar_system().angles[i] += solar_system().speeds[i];
-        if (solar_system().angles[i] >= 2 * PI) {
-            solar_system().angles[i] -= 2 * PI; // Keep angle within 0 to 2*PI
+        // Mise à jour de l'angle pour le cercle
+        angles[i%8] += speeds[i%8]; // Incrémente l'angle basé sur la vitesse
+        if (angles[i%8] >= 360.0) {
+            angles[i%8] -= 360.0; // Réinitialiser l'angle si nécessaire
         }
+
+        // Calculer la nouvelle position du cercle
+        int x = static_cast<int>(CENTER_X + distances[i] * cos(angles[i%8] * PI / 180.0));
+        int y = static_cast<int>(CENTER_Y + distances[i] * sin(angles[i%8] * PI / 180.0));
+
+        // Mettre à jour la position du cercle
+        circles[i].SetX(x);
+        circles[i].SetY(y);
+
+        // Dessiner le cercle
+        graphics_.DrawCircle(circles[i]); // Vous devrez implémenter cette méthode dans Graphics
     }
 }
