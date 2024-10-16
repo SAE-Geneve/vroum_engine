@@ -70,14 +70,6 @@ public:
 
         return result;
     }
-
-    // Affichage des valeurs (pour vérification)
-    void print() const {
-        std::cout << "FourVec2: (" << x[0] << ", " << y[0] << "), ("
-                  << x[1] << ", " << y[1] << "), ("
-                  << x[2] << ", " << y[2] << "), ("
-                  << x[3] << ", " << y[3] << ")" << std::endl;
-    }
 };
 
 #endif //FOUR_VEC2_H

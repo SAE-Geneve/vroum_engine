@@ -7,33 +7,33 @@
 
 class Circle
 {
-    int x = 0;
-    int y = 0;
-    int radius = 0;
+    int x_ = 0;
+    int y_ = 0;
+    int radius_ = 0;
 
 public:
-    int r = 0;
-    int g = 0;
-    int b = 0;
+    int r_ = 0;
+    int g_ = 0;
+    int b_ = 0;
 
-    Circle(int x, int y, int radius)
+    Circle(const int x, const int y, const int radius)
     {
-        this->x = x;
-        this->y = y;
-        this->radius = radius;
-        randomizeColor();
+        this->x_ = x;
+        this->y_ = y;
+        this->radius_ = radius;
+        RandomizeColor();
     }
 
-    int getX() const { return x; }
-    int getY() const { return y; }
-    int GetRadius() const { return radius; }
-    void SetX(int n_x) { x = n_x; }
-    void SetY(int n_y) { y = n_y; }
-    void SetRadius(int n_radius) { radius = n_radius; }
+    [[nodiscard]] int GetX() const { return x_; }
+    [[nodiscard]] int GetY() const { return y_; }
+    [[nodiscard]] int GetRadius() const { return radius_; }
+    void SetX(const int n_x) { x_ = n_x; }
+    void SetY(const int n_y) { y_ = n_y; }
+    void SetRadius(const int n_radius) { radius_ = n_radius; }
 
 
-    void randomizeColor();
-    void randomizeSize(int maxSize);
+    void RandomizeColor();
+    void RandomizeSize(int max_size);
     void SetPosition(int x, int y);
 };
 

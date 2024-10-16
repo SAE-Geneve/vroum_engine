@@ -18,15 +18,15 @@ struct Square {
 
 class Graphics {
 public:
-    Graphics(SDL_Renderer* renderer);
+	explicit Graphics(SDL_Renderer* renderer);
     Graphics();
     void DrawSquare(const Square& square) const;
     void DrawCircle(const Circle& circle) const;
     void SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const;
-    SDL_Renderer* Get_renderer() const { return renderer;}
+	[[nodiscard]] SDL_Renderer* GetRenderer() const { return renderer_;}
 
 private:
-    SDL_Renderer* renderer;
+    SDL_Renderer* renderer_;
 };
 
 #endif // GRAPHICS_H

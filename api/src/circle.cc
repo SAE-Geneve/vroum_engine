@@ -8,22 +8,22 @@
 #include <cstdlib>
 
 
-void Circle::randomizeColor()
+void Circle::RandomizeColor()
 {
-    r = rand() % 256;
-    g = rand() % 256;
-    b = rand() % 256;
+    r_ = rand() % 256;
+    g_ = rand() % 256;
+    b_ = rand() % 256;
 }
 
 
-void Circle::randomizeSize(int maxSize)
+void Circle::RandomizeSize(const int max_size)
 {
-    SetRadius(std::clamp(rand() % (maxSize + 1), 10, maxSize));
+    SetRadius(std::clamp(rand() % (max_size + 1), 10, max_size));
 }
 
 
-void Circle::SetPosition(int n_x, int n_y)
+void Circle::SetPosition(const int x, const int y)
 {
-    x = n_x;
-    y = n_y;
+    x_ = x;
+    y_ = y;
 }

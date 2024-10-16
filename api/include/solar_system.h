@@ -9,22 +9,22 @@
 #include "Vector"
 #include "circle.h"
 
-class solar_system {
+class SolarSystem {
 public:
-        solar_system(Graphics& graphics);
+		explicit SolarSystem(Graphics& graphics);
 
         // Initialiser le système solaire avec une liste de cercles
-        void StartSolarSystem(const std::vector<Circle>& circles);
+        void StartSolarSystem(std::vector<Circle>&& circles);
 
         // Faire tourner les cercles autour du centre de la fenêtre
         void RunSolarSystem();
 
 private:
         Graphics graphics_;
-        std::vector<double> angles; // Angles pour chaque cercle
-        std::vector<double> distances = { 50, 100, 150, 200, 250, 300, 350, 400 }; // Distances du centre
-        std::vector<double> speeds = { 0.02, 0.018, 0.016, 0.014, 0.012, 0.01, 0.008, 0.006 }; // Vitesses de rotation
-        std::vector<Circle> circles; // Vecteur de cercles
+        std::vector<float> angles_; // Angles pour chaque cercle
+        std::vector<float> distances_ = { 50, 100, 150, 200, 250, 300, 350, 400 }; // Distances du centre
+        std::vector<float> speeds_ = { 0.04, 0.018, 0.006, 0.014, 0.012, 0.01, 0.008, 0.006 }; // Vitesses de rotation
+        std::vector<Circle> circles_; // Vecteur de cercles
 };
 
 

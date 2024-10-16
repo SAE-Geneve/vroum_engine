@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 
     // Initialize Graphics with the window's renderer
     Graphics graphics(window.GetRenderer());
-    solar_system system(graphics);
+    SolarSystem system(graphics);
 
     /* // Create a vector to store multiple squares and circles
     std::vector<Square> squares = {
@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
         {300, 250, 45},
         {400, 500, 30}
     };
-    system.StartSolarSystem(circles);
+    system.StartSolarSystem(std::move(circles));
     //std::cout << "Number of circles: " << system.circles.size() << std::endl;
     Uint32 lastTime = SDL_GetTicks(); // Start time of the main loop
     Uint32 currentTime, deltaTime;

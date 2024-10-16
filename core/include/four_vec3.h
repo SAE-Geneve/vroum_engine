@@ -33,8 +33,6 @@ public:
         x[3] = x3; y[3] = y3; z[3] = z3;
     }
 
-
-    template<typename T>
     FourVec3<T> operator+(const FourVec3<T>& other) const {
         FourVec3<T> result;
 
@@ -64,7 +62,6 @@ public:
     }
 
 
-    template<typename T>
     FourVec3<T> operator-(const FourVec3<T>& other) const {
         FourVec3<T> result;
 
