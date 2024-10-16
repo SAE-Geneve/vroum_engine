@@ -146,7 +146,7 @@ public:
 
     std::optional<Mat3x3<T>> Inverted() const
     {
-        T det = det();
+        T det = Det();
 
         if (det == 0.0)
         {

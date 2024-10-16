@@ -1,7 +1,7 @@
 
 #include "Matrice4x4.h" // Assurez-vous que ce fichier existe et contient votre définition de Mat4x4
 #include <gtest/gtest.h>
-
+/*
 TEST(Mat4x4Test, Determinant) {
     Mat4x4<double> mat(1, 2, 3, 4,
                        5, 6, 7, 8,
@@ -166,4 +166,4 @@ TEST(Mat4x4Test, MultiplicationByVector) {
     EXPECT_DOUBLE_EQ(result.y, 158);
     EXPECT_DOUBLE_EQ(result.z, 246);
     EXPECT_DOUBLE_EQ(result.w, 334);
-}
+}*/

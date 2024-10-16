@@ -23,10 +23,10 @@ public:
      */
     constexpr Mat2x2(Vec2<T> a, Vec2<T> b) noexcept
     {
-        Val[0][0] = a.X;
-        Val[0][1] = b.X;
-        Val[1][0] = a.Y;
-        Val[1][1] = b.Y;
+        Val[0][0] = a.x;
+        Val[0][1] = b.x;
+        Val[1][0] = a.y;
+        Val[1][1] = b.y;
     }
 
     [[nodiscard]] constexpr static Mat2x2<T> Identity() noexcept
@@ -41,7 +41,7 @@ public:
 
     std::optional<Mat2x2<T>> inverse() const
     {
-        T det = det();
+        T det = Det();
 
         if (det == 0.0)
         {
@@ -109,8 +109,8 @@ public:
     [[nodiscard]] constexpr Vec2<T> operator*(const Vec2<T> vec) const noexcept
     {
         return Vec2<T>(
-            Val[0][0] * vec.X + Val[0][1] * vec.Y,
-            Val[1][0] * vec.X + Val[1][1] * vec.Y
+            Val[0][0] * vec.x + Val[0][1] * vec.y,
+            Val[1][0] * vec.x + Val[1][1] * vec.y
         );
     }
 
