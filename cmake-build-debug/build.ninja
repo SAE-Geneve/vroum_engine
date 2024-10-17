@@ -134,6 +134,14 @@ build core\CMakeFiles\core.dir\src\empty.cc.obj: CXX_COMPILER__core_unscanned_De
   TARGET_COMPILE_PDB = core\CMakeFiles\core.dir\core.pdb
   TARGET_PDB = core\core.pdb
 
+build core\CMakeFiles\core.dir\src\four_vec2.cc.obj: CXX_COMPILER__core_unscanned_Debug C$:\Users\ROG\Documents\prog\vroum\vroum_engine\core\src\four_vec2.cc || cmake_object_order_depends_target_core
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd
+  INCLUDES = -IC:\Users\ROG\Documents\prog\vroum\vroum_engine\core\include
+  OBJECT_DIR = core\CMakeFiles\core.dir
+  OBJECT_FILE_DIR = core\CMakeFiles\core.dir\src
+  TARGET_COMPILE_PDB = core\CMakeFiles\core.dir\core.pdb
+  TARGET_PDB = core\core.pdb
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target core
@@ -142,7 +150,7 @@ build core\CMakeFiles\core.dir\src\empty.cc.obj: CXX_COMPILER__core_unscanned_De
 #############################################
 # Link the static library core\core.lib
 
-build core\core.lib: CXX_STATIC_LIBRARY_LINKER__core_Debug core\CMakeFiles\core.dir\src\empty.cc.obj
+build core\core.lib: CXX_STATIC_LIBRARY_LINKER__core_Debug core\CMakeFiles\core.dir\src\empty.cc.obj core\CMakeFiles\core.dir\src\four_vec2.cc.obj
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = core\CMakeFiles\core.dir

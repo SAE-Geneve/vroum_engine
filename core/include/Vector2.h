@@ -1,6 +1,9 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
 
+#include <stdexcept>
+#include "cmath"
+
 template <typename T>
 struct Vec2 {
     T x = 0, y = 0;

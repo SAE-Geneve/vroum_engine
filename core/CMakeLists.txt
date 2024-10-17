@@ -12,7 +12,8 @@ add_library(core ${SRC_FILES} ${HEADER_FILES}
         include/quatetrions.h
         include/four_vec2.h
         include/four_vec3.h
-        include/four_vec4.h)
+        include/four_vec4.h
+        src/four_vec2.cc)
 target_include_directories(core PUBLIC include/)
 
 add_executable(core_test test/test_vec2.cc
