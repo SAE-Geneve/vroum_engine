@@ -1,1 +1,147 @@
-[bB]uild/
+# Fichiers et dossiers générés par CLion
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Dossier de build
+cmake-build-debug/
+cmake-build-release/
+cmake-build-relwithdebinfo/
+cmake-build-relwithdebinfo-visual-studio/
+build/
+bin/
+obj/
+
+# Dossiers et fichiers de CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Fichiers de logs et temporaires
+*.log
+*.tmp
+*.swp
+
+# Fichiers binaires
+*.exe
+*.out
+*.app
+
+# Fichiers spécifiques à d'autres IDE
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers de configuration utilisateur
+*.user
+*.userprefs
+*.suo
+*.name
+*.run.xml
+
+# Fichiers générés par le compilateur
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+*.class
+
+# Fichiers de débogage
+*.pdb
+*.ilk
+*.log
+*.dmp
+*.vcxproj*
+*.pidb
+*.tlog
+*.log
+*.sdf
+*.ipch
+*.aps
+*.ncb
+*.opensdf
+*.opendb
+*.sln
+*.suo
+
+# Dossiers de cache et temporaires
+tmp/
+.cache/
+*.pyc
+*.pyo
+__pycache__/
+
+# Fichiers spécifiques à macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Icones spécifiques à macOS
+.Icon?
+.metadata_never_index
+
+# Fichiers de tags et de back-ups
+tags
+TAGS
+*~
+*.bak
+*.swp
+*.swo
+*.orig
+*.idx
+*.log
+
+# Fichiers de LaTeX
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.dvi
+*.ps
+*.pdf
+*.log
+*.out
+
+# Fichiers de Node.js
+node_modules/
+npm-debug.log
+
+# Fichiers de Python
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+bin/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+*.egg-info/
+.installed.cfg
+
+# Fichiers de Java
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Fichiers de JetBrains
+*.idea/

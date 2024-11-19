@@ -3,30 +3,42 @@
 #define GRAPHICS_H
 
 #include <SDL2/SDL.h>
-#include "Window.h"
-#include "circle.h"
+#include "Shape.h"
+#include "Circle.h"
+#include "array"
+#include "quadtree.h"
 
-struct Square {
-    int x, y;   // Position of the center
-    int size;   // Size of the square's side
-};
-
-// struct Circle {
-//     int x, y;   // Position of the center
-//     int radius; // Radius of the circle
-// };
-
-class Graphics {
+class Graphics
+{
 public:
-	explicit Graphics(SDL_Renderer* renderer);
-    Graphics();
-    void DrawSquare(const Square& square) const;
-    void DrawCircle(const Circle& circle) const;
-    void SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const;
-	[[nodiscard]] SDL_Renderer* GetRenderer() const { return renderer_;}
+    Graphics(SDL_Renderer* renderer);
+    void DrawSquare(const Shape& square);
+    void initializeCircleVertices(const Shape& circle);
+    void updateCirclePosition(const Shape& circle);
+    void SetDrawColor(int r, int g, int b, int a) const;
+    void render();
+    void DrawShape(Shape& shape);
+    void DrawRec(const Shape &rectangle);
+    SDL_Renderer& get_rendere() { return *renderer; }
 
-private:
-    SDL_Renderer* renderer_;
+
+
+  void DrawQuadtree(const Quadtree &quadtree, int depth);
+
+
+
+
+
+ private:
+  SDL_Renderer* renderer;
+  std::vector<SDL_Vertex> vertices_;
+  std::vector<int> indices_;
+
+  int num_segments = 12;
+  void updatePolygonPosition(const Shape &polygon);
+  void initializePolygonVertices(const Shape &polygon);
+
+
 };
 
 #endif // GRAPHICS_H

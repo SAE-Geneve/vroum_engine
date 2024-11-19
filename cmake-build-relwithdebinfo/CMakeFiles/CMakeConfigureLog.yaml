@@ -109,8 +109,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-g1pb1s"
-      binary: "C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-g1pb1s"
+      source: "C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-f4uezr"
+      binary: "C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-f4uezr"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -122,11 +122,11 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-g1pb1s'
+        Change Dir: 'C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-f4uezr'
         
-        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_e8bef
-        [1/2] C:\\PROGRA~1\\MICROS~4\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_e8bef.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_e8bef.dir\\ /FS -c "C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
-        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_e8bef.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~4\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_e8bef.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_e8bef.exe /implib:cmTC_e8bef.lib /pdb:cmTC_e8bef.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && C:\\Windows\\system32\\cmd.exe /C "cd /D C:\\Users\\ROG\\Documents\\prog\\vroum\\vroum_engine\\cmake-build-relwithdebinfo\\CMakeFiles\\CMakeScratch\\TryCompile-g1pb1s && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/dev/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-g1pb1s/cmTC_e8bef.exe -installedDir C:/dev/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_bf114
+        [1/2] C:\\PROGRA~1\\MICROS~4\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_bf114.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_bf114.dir\\ /FS -c "C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_bf114.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~4\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_bf114.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_bf114.exe /implib:cmTC_bf114.lib /pdb:cmTC_bf114.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && C:\\Windows\\system32\\cmd.exe /C "cd /D C:\\Users\\ROG\\Documents\\prog\\vroum\\vroum_engine\\cmake-build-relwithdebinfo\\CMakeFiles\\CMakeScratch\\TryCompile-f4uezr && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/dev/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-f4uezr/cmTC_bf114.exe -installedDir C:/dev/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
         
       exitCode: 0
   -
@@ -166,8 +166,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-djqvbt"
-      binary: "C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-djqvbt"
+      source: "C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-ldw1ce"
+      binary: "C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-ldw1ce"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -180,11 +180,11 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-djqvbt'
+        Change Dir: 'C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-ldw1ce'
         
-        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_b6cfc
-        [1/2] C:\\PROGRA~1\\MICROS~4\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /GR /EHsc  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_b6cfc.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_b6cfc.dir\\ /FS -c "C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
-        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_b6cfc.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~4\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_b6cfc.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_b6cfc.exe /implib:cmTC_b6cfc.lib /pdb:cmTC_b6cfc.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && C:\\Windows\\system32\\cmd.exe /C "cd /D C:\\Users\\ROG\\Documents\\prog\\vroum\\vroum_engine\\cmake-build-relwithdebinfo\\CMakeFiles\\CMakeScratch\\TryCompile-djqvbt && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/dev/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-djqvbt/cmTC_b6cfc.exe -installedDir C:/dev/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.1/bin/ninja/win/x64/ninja.exe" -v cmTC_3924e
+        [1/2] C:\\PROGRA~1\\MICROS~4\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /GR /EHsc  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_3924e.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_3924e.dir\\ /FS -c "C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\JetBrains\\CLion 2024.2.1\\bin\\cmake\\win\\x64\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_3924e.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100226~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~4\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1438~1.331\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_3924e.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_3924e.exe /implib:cmTC_3924e.lib /pdb:cmTC_3924e.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && C:\\Windows\\system32\\cmd.exe /C "cd /D C:\\Users\\ROG\\Documents\\prog\\vroum\\vroum_engine\\cmake-build-relwithdebinfo\\CMakeFiles\\CMakeScratch\\TryCompile-ldw1ce && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/dev/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/ROG/Documents/prog/vroum/vroum_engine/cmake-build-relwithdebinfo/CMakeFiles/CMakeScratch/TryCompile-ldw1ce/cmTC_3924e.exe -installedDir C:/dev/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
         
       exitCode: 0
   -

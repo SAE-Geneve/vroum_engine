@@ -1,48 +1,48 @@
-// Window.cpp
 #include "Window.h"
 
 Window::Window(const char* title, int width, int height)
-    : window_(nullptr), renderer_(nullptr), width_(width), height_(height) {
+    : width(width), height(height) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        std::cerr << "SDL initialization error: " << SDL_GetError() << std::endl;
-        return;
-    }
-
-    window_ = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
-    if (!window_) {
-        std::cerr << "Window creation error: " << SDL_GetError() << std::endl;
-        SDL_Quit();
-        return;
-    }
-
-    renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
-    if (!renderer_) {
-        std::cerr << "Renderer creation error: " << SDL_GetError() << std::endl;
-        SDL_DestroyWindow(window_);
-        SDL_Quit();
-        return;
+        std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
+        window = nullptr;
+        renderer = nullptr;
+    } else {
+        window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
+        if (window == nullptr) {
+            std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
+            renderer = nullptr;
+        } else {
+            renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+            if (renderer == nullptr) {
+                std::cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << std::endl;
+            }
+        }
     }
 }
 
 Window::~Window() {
-    SDL_DestroyRenderer(renderer_);
-    SDL_DestroyWindow(window_);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
 SDL_Renderer* Window::GetRenderer() const {
-    return renderer_;
+    return renderer;
+}
+
+SDL_Window* Window::GetSDLWindow() const
+{
+  return window;
 }
 
 bool Window::IsValid() const {
-    return window_ != nullptr && renderer_ != nullptr;
+    return window != nullptr && renderer != nullptr;
 }
 
 void Window::Clear() const {
-    SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
-    SDL_RenderClear(renderer_);
+    SDL_RenderClear(renderer);
 }
 
 void Window::Present() const {
-    SDL_RenderPresent(renderer_);
+    SDL_RenderPresent(renderer);
 }
